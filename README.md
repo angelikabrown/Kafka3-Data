@@ -70,7 +70,7 @@ to create a new kafka topic (the one you need for the phase1 scripts to work. Yo
 
 ``` bash
 kafka-topics --create \
---zookeeper localhost:2181 \
+--bootstrap-server localhost:9092 \
 --replication-factor 1 \
 --partitions 1 \
 --topic bank-customer-events
