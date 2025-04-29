@@ -17,6 +17,14 @@ class XactionConsumer:
         # data gets lost!
         # add a way to connect to your database here.
 
+        #app = Flask(__name__)
+        #app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///consumers.db'
+        #app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+        #app.config['SECRET_KEY'] = 'angie'  
+
+    
+        #db.init_app(app)        
+        
         #Go back to the readme.
 
     def handleMessages(self):
