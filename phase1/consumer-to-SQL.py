@@ -18,13 +18,19 @@ class XactionConsumer:
         # add a way to connect to your database here.
 
         #app = Flask(__name__)
-        #app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///consumers.db'
+        #app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///transactions.db'
         #app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
         #app.config['SECRET_KEY'] = 'angie'  
 
-    
-        #db.init_app(app)        
-        
+        #initilaze the database with the app, connecting them
+        #db.init_app(app)
+
+        #Create the database if it doesn't exist
+        #if not path.exists('transactions.db'):
+        #with app.app_context():
+        #   db.create_all()
+        #   print("Database created!")
+        #   print(db)        
         #Go back to the readme.
 
     def handleMessages(self):
