@@ -21,9 +21,12 @@ class XactionConsumer:
         # data gets lost!
         # add a way to connect to your database here.
         app = Flask(__name__)
+        #connect to the database
         app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://angel_b:gore1984@localhost/customer'
+        #initialize the database
         db.init_app(app)
         with app.app_context():
+            #create the database
             db.create_all()
 
 
