@@ -4,6 +4,11 @@ from flask import Flask
 from models import db, Transaction
 
 
+#run ./start-kafka.sh in Kafka3-Data directory
+# next, run the producer in phase1 directory
+# then run this consumer in the same directory
+# This is assuming your database is running and transaction table created  
+
 class XactionConsumer:
     def __init__(self):
         self.consumer = KafkaConsumer('bank-customer-events',
