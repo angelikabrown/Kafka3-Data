@@ -1,5 +1,9 @@
 from kafka import KafkaConsumer, TopicPartition
 from json import loads
+import os
+from flask import Flask
+from sqlalchemy.sql import func
+from flask_sqlalchemy import SQLAlchemy
 
 class XactionConsumer:
     def __init__(self):
@@ -16,7 +20,11 @@ class XactionConsumer:
         # THE PROBLEM is every time we re-run the Consumer, ALL our customer
         # data gets lost!
         # add a way to connect to your database here.
-    
+        app = Flask(__name__)
+        app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://angel_b:gore1984@localhost/customer'
+        db = SQLAlchemy(app)
+        
+
         #Go back to the readme.
 
     def handleMessages(self):
