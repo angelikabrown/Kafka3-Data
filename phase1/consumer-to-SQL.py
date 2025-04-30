@@ -2,8 +2,8 @@ from kafka import KafkaConsumer, TopicPartition
 from json import loads
 import os
 from flask import Flask
-from sqlalchemy.sql import func
-from flask_sqlalchemy import SQLAlchemy
+from models import db, Transaction
+
 
 class XactionConsumer:
     def __init__(self):
@@ -22,8 +22,10 @@ class XactionConsumer:
         # add a way to connect to your database here.
         app = Flask(__name__)
         app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://angel_b:gore1984@localhost/customer'
-        db = SQLAlchemy(app)
-        
+        db.init_app(app)
+        with app.app_context():
+            db.create_all()
+
 
         #Go back to the readme.
 
@@ -31,15 +33,16 @@ class XactionConsumer:
         for message in self.consumer:
             message = message.value
             print('{} received'.format(message))
-            self.ledger[message['custid']] = message
-            # add message to the transaction table in your SQL usinf SQLalchemy
-            if message['custid'] not in self.custBalances:
-                self.custBalances[message['custid']] = 0
-            if message['type'] == 'dep':
-                self.custBalances[message['custid']] += message['amt']
-            else:
-                self.custBalances[message['custid']] -= message['amt']
-            print(self.custBalances)
+            transaction = Transaction(
+                custid=message['custid'],
+                type=message['type'],
+                date=message['date'],
+                amt=message['amt']
+
+            )
+            db.session.add(transaction)
+            db.session.commit()
+            print("Transaction added to database")
 
 if __name__ == "__main__":
     c = XactionConsumer()
