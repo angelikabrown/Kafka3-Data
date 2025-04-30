@@ -85,7 +85,7 @@ class XactionConsumer:
                 )
                 db.session.add(transaction)
                 db.session.commit()
-    
+                self.update_summary(message)
                 print("Transaction added to database")
         
         
@@ -95,3 +95,4 @@ class XactionConsumer:
 if __name__ == "__main__":
     c = XactionConsumer()
     c.handleMessages()
+    
