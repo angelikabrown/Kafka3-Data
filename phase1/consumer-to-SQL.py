@@ -38,8 +38,8 @@ class XactionConsumer:
         db.init_app(self.app)
         with self.app.app_context():
             #create the database
-    
             db.create_all()
+            
     def update_summary(self, transaction):
         #update the summary of the transaction
         if transaction['type'] == 'dep':
@@ -95,4 +95,4 @@ class XactionConsumer:
 if __name__ == "__main__":
     c = XactionConsumer()
     c.handleMessages()
-    
+
